@@ -349,8 +349,7 @@ def _run_experiment(n_trials, fname, evaluators, load_datasetf, tparams, mparams
     inum_fmt = lambda t: '%d/%d'.rjust(inum_digits) % (t, n_trials)
     bar = progressbar.ProgressBar(maxval=100, widgets=['Trial: %s  '%inum_fmt(1), 
                                                           progressbar.Bar(), '  ', 
-                                                          progressbar.Timer()])
-    bar.start()
+                                                          progressbar.Timer()]).start()
     while any([ w.is_alive() for w in workers ]):
         try:
             if not(terminate.is_set()):
@@ -363,7 +362,7 @@ def _run_experiment(n_trials, fname, evaluators, load_datasetf, tparams, mparams
                                                           progressbar.Bar(), '  ', 
                                                           progressbar.Timer()])
 
-            time.sleep(1.0);
+            time.sleep(1.0)
         except KeyboardInterrupt:
             task_iterator.close()
             terminate.set()
