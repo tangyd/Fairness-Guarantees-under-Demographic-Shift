@@ -360,7 +360,7 @@ def _run_experiment(n_trials, fname, evaluators, load_datasetf, tparams, mparams
                     bar.finish()
                     bar = progressbar.ProgressBar(maxval=100, widgets=['Trial: %s  '%inum_fmt(trialnum), 
                                                           progressbar.Bar(), '  ', 
-                                                          progressbar.Timer()])
+                                                          progressbar.Timer()]).start()
 
             time.sleep(1.0)
         except KeyboardInterrupt:
@@ -386,6 +386,8 @@ def _run_experiment(n_trials, fname, evaluators, load_datasetf, tparams, mparams
     task_iterator.close()
     terminate.set()
     c_proc.join()
+    # for w in workers:
+    #     w.join()
     print()
     consolidate_results(n_workers, task_iterator, fname, result_locks, debug=True)
     if not(err is None):
@@ -400,17 +402,21 @@ def _run_experiment(n_trials, fname, evaluators, load_datasetf, tparams, mparams
 def save_worker_results(fname, wid, save_data, lock, block=False):
     if len(save_data) == 0:
         return False
-    if lock.acquire(block):
-        # Save results to a worker-specific file
-        fname = fname.replace('.h5', '.worker_%d.h5'%wid)
-        df = pd.DataFrame(save_data)
-        with pd.HDFStore(fname) as store:
-            if '/results' in store.keys():
-                df = pd.concat([store['results'], df], ignore_index=True)
-            store.put('results', df)
-        lock.release()
-        return True
-    else:
+    try:
+        if lock.acquire(block):
+            # Save results to a worker-specific file
+            fname = fname.replace('.h5', '.worker_%d.h5'%wid)
+            df = pd.DataFrame(save_data)
+            with pd.HDFStore(fname) as store:
+                if '/results' in store.keys():
+                    df = pd.concat([store['results'], df], ignore_index=True)
+                store.put('results', df)
+            lock.release()
+            return True
+        else:
+            return False
+    except BrokenPipeError:
+        print(f"Broken pipe error occurred in worker {wid}")
         return False
 
 def consolidate(n_workers, task_iterator, fname, result_locks, exit, debug=False):
