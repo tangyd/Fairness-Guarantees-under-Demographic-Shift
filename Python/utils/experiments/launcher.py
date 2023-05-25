@@ -347,9 +347,10 @@ def _run_experiment(n_trials, fname, evaluators, load_datasetf, tparams, mparams
     prev_tnum = 1
     inum_digits = 2*np.floor(np.log10(n_trials)).astype(int)+1
     inum_fmt = lambda t: '%d/%d'.rjust(inum_digits) % (t, n_trials)
-    bar = progressbar.ProgressBar(max_value=100, widgets=['Trial: %s  '%inum_fmt(1), 
+    bar = progressbar.ProgressBar(maxval=100, widgets=['Trial: %s  '%inum_fmt(1), 
                                                           progressbar.Bar(), '  ', 
                                                           progressbar.Timer()])
+    bar.start()
     while any([ w.is_alive() for w in workers ]):
         try:
             if not(terminate.is_set()):
@@ -358,7 +359,7 @@ def _run_experiment(n_trials, fname, evaluators, load_datasetf, tparams, mparams
                 if trialnum != prev_tnum and trialnum <= n_trials:
                     prev_tnum = trialnum
                     bar.finish()
-                    bar = progressbar.ProgressBar(max_value=100, widgets=['Trial: %s  '%inum_fmt(trialnum), 
+                    bar = progressbar.ProgressBar(maxval=100, widgets=['Trial: %s  '%inum_fmt(trialnum), 
                                                           progressbar.Bar(), '  ', 
                                                           progressbar.Timer()])
 

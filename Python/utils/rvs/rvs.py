@@ -455,6 +455,7 @@ class ConstraintManager():
 
 			elif l < -1 and u < -1:
 				return (ui, li)
+		return (0,0)
 
 	def bound_variable(self, name, delta, mode='hoeffding', n_scale=1.0, bootstrap_samples=1000):
 		# Returns a <delta>-probability confidence interval on the value of <name> using <mode>.	

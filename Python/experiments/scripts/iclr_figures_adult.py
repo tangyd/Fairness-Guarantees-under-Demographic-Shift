@@ -16,7 +16,8 @@ from utils.argsweep    import ArgumentSweeper
 import pandas as pd
 
 plt.rcParams['text.usetex'] = True
-plt.rcParams['text.latex.preamble'] = [r'\usepackage{amsmath}']
+# plt.rcParams['text.latex.preamble'] = [r'\usepackage{amsmath}']
+plt.rcParams['text.latex.preamble'].join([r'\usepackage{amsmath}'])
 
 if __name__ == '__main__':
 	with ArgumentSweeper() as parser:

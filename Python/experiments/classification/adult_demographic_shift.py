@@ -429,12 +429,12 @@ if __name__ == '__main__':
 		print(ds.make_intervals(Pr_D, args.dshift_alpha, epsilon=1e-3))
 
 
-		# print()
-		# # Create a results file and directory
-		# save_path = launcher.prepare_paths(args.base_path, tparams, mparams, smla_names, root='results', filename=None)
-		# print()
-		# # Run the experiment
-		# launcher.run(args.n_trials, save_path, model_evaluators, load_dataset, tparams, mparams, n_workers=args.n_jobs, seed=None)
+		print()
+		# Create a results file and directory
+		save_path = launcher.prepare_paths(args.base_path, tparams, mparams, smla_names, root='results', filename=None)
+		print()
+		# Run the experiment
+		launcher.run(args.n_trials, save_path, model_evaluators, load_dataset, tparams, mparams, n_workers=args.n_jobs, seed=None)
 
 
 		# tp = tparams[-1]
@@ -447,14 +447,14 @@ if __name__ == '__main__':
 		# 	klen = max([ len(k) for k in results.keys() ])
 		# 	print('   Disable linprog = False:')
 		# 	for key, value in results.items():
-		# 		print(f'      {k.rjust(klen)}: {value}')
+		# 		print(f'      {key.rjust(klen)}: {value}')
 
 		# 	mp['disable_linprog'] = True
 		# 	results = model_evaluators['FairlearnSVC'](dataset, mp)
 		# 	klen = max([ len(k) for k in results.keys() ])
 		# 	print('Disable linprog = False:')
 		# 	for key, value in results.items():
-		# 		print(f'      {k.rjust(klen)}: {value}')
+		# 		print(f'      {key.rjust(klen)}: {value}')
 
 		# for name, evalf in model_evaluators.items():
 		# 	print(name)
