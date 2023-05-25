@@ -107,10 +107,10 @@ ENV/
 *.log
 
 # subdirectories
-Python/results*
-Python/figures*
+# Python/results*
+# Python/figures*
 SeldonianML-Notes/
 SeldonianML-Papers/
 
-# MacOS files
-.DS_Store
+# # MacOS files
+# .DS_Store
