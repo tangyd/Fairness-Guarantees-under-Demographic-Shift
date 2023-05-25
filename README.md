@@ -1,7 +1,7 @@
 # STAT 37787 Trustworthy Machine Learning Project
 ## Group member: Mengqi Liu, Yudan Tang
 
-This repository stores the reimplementation of the result from the ICLR 2022 paper, ("Fairness Guarantees under Demographic Shift")[https://openreview.net/forum?id=wbPObLm6ueA], we hope to see the fairness of the algorithm proposed in this paper and see if the success in this algorithm is also reproducable in other datasets. 
+This repository stores the reimplementation of the result from the ICLR 2022 paper, ["Fairness Guarantees under Demographic Shift"](https://openreview.net/forum?id=wbPObLm6ueA), we hope to see the fairness of the algorithm proposed in this paper and see if the success in this algorithm is also reproducable in other datasets. 
 
 # Installation
 
@@ -37,3 +37,5 @@ Once completed, the new figures will be saved to `Python/figures/*` by default.
 # License
 
 SeldonianML is released under the MIT license.
+
+
